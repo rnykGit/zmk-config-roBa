@@ -43,16 +43,6 @@
             bindings = <&to 6>;
             key-positions = <34 42>;
         };
-
-        lefttab {
-            bindings = <&kp RC(RS(TAB))>;
-            key-positions = <18 30>;
-        };
-
-        righttab {
-            bindings = <&kp RC(TAB)>;
-            key-positions = <19 31>;
-        };
     };
 
     macros {
@@ -80,10 +70,10 @@
 
         default_layer {
             bindings = <
-&kp Q      &kp W         &kp E             &kp R         &kp T                                                           &kp Y        &kp U  &lt 5 I  &kp O      &kp P
-&kp A      &kp S         &kp D             &kp F         &kp G      &kp EQUAL                     &kp EQUAL              &kp H        &kp J  &kp K    &kp L      &kp SEMI
-&kp Z      &kp X         &kp C             &kp V         &kp B      &kp MINUS                     &kp MINUS              &kp B        &kp N  &kp M    &kp COMMA  &kp DOT
-&kp LCTRL  &kp LEFT_WIN  &kp SINGLE_QUOTE  &kp LEFT_WIN  &lt 2 TAB  &mt LEFT_SHIFT BACKSPACE      &mt RIGHT_SHIFT SPACE  &lt 1 ENTER                             &kp RA(F4)
+&kp Q   &kp W   &kp E   &kp R         &kp T                                                           &kp Y        &kp U  &lt 5 I  &kp O      &kp P
+&kp A   &kp S   &kp D   &kp F         &kp G      &kp SINGLE_QUOTE              &kp EQUAL              &kp H        &kp J  &kp K    &kp L      &kp SEMI
+&kp Z   &kp X   &kp C   &kp V         &kp B      &kp SLASH                     &kp MINUS              &kp B        &kp N  &kp M    &kp COMMA  &kp DOT
+&trans  &trans  &trans  &kp LEFT_WIN  &lt 2 TAB  &mt LEFT_SHIFT BACKSPACE      &mt RIGHT_SHIFT SPACE  &lt 1 ENTER                             &kp RIGHT_ALT
             >;
 
             sensor-bindings = <&inc_dec_kp PG_UP PAGE_DOWN>;
@@ -120,10 +110,10 @@
 
         MOUSE {
             bindings = <
-&trans  &trans  &trans       &trans      &trans                      &trans  &trans    &trans    &trans  &trans
-&trans  &trans  &kp K_PASTE  &kp K_COPY  &trans  &trans      &trans  &trans  &mkp MB1  &mkp MB2  &trans  &trans
-&trans  &trans  &trans       &trans      &trans  &trans      &trans  &trans  &trans    &trans    &trans  &trans
-&trans  &trans  &trans       &trans      &trans  &trans      &trans  &trans                              &trans
+&trans  &trans  &trans       &trans      &trans                               &trans     &trans    &trans    &trans  &trans
+&trans  &trans  &kp K_PASTE  &kp K_COPY  &trans  &trans      &trans           &trans     &mkp MB1  &mkp MB2  &trans  &trans
+&trans  &trans  &trans       &trans      &trans  &trans      &trans           &trans     &trans    &trans    &trans  &trans
+&trans  &trans  &trans       &trans      &trans  &trans      &kp RIGHT_SHIFT  &kp RCTRL                              &trans
             >;
         };
 
