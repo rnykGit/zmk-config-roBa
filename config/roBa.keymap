@@ -29,13 +29,13 @@
     combos {
         compatible = "zmk,combos";
 
-        muhennkann {
+        muhenkan {
             bindings = <&kp LANGUAGE_2>;
             key-positions = <13 12>;
         };
 
         henkan {
-            bindings = <&kp LANGUAGE_1>;
+            bindings = <&lt 5 LANGUAGE_1>;
             key-positions = <18 19>;
         };
 
@@ -70,10 +70,10 @@
 
         default_layer {
             bindings = <
-&mt Q ESCAPE      &kp W         &kp E             &kp R         &kp T                                                           &kp Y        &kp U  &lt 5 I  &kp O      &kp P
-&kp A             &kp S         &kp D             &kp F         &kp G      &kp EQUAL                     &kp HASH               &kp H        &kp J  &kp K    &kp L      &kp SEMI
-&mt LEFT_SHIFT Z  &kp X         &kp C             &kp V         &kp B      &kp MINUS                     &kp SLASH              &kp B        &kp N  &kp M    &kp COMMA  &kp DOT
-&kp LCTRL         &kp LEFT_WIN  &kp SINGLE_QUOTE  &kp LEFT_ALT  &lt 2 TAB  &mt LEFT_SHIFT BACKSPACE      &mt RIGHT_SHIFT SPACE  &lt 1 ENTER                             &mo 5
+&kp Q      &kp W         &kp E             &kp R         &kp T                                                           &kp Y        &kp U  &lt 5 I  &kp O      &kp P
+&kp A      &kp S         &kp D             &kp F         &kp G      &kp EQUAL                     &kp HASH               &kp H        &kp J  &kp K    &kp L      &kp SEMI
+&kp Z      &kp X         &kp C             &kp V         &kp B      &kp MINUS                     &kp SLASH              &kp B        &kp N  &kp M    &kp COMMA  &kp DOT
+&kp LCTRL  &kp LEFT_WIN  &kp SINGLE_QUOTE  &kp LEFT_ALT  &lt 2 TAB  &mt LEFT_SHIFT BACKSPACE      &mt RIGHT_SHIFT SPACE  &lt 1 ENTER                             &kp RIGHT_ALT
             >;
 
             sensor-bindings = <&inc_dec_kp PG_UP PAGE_DOWN>;
