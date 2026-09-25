@@ -1,0 +1,5 @@
+if(CONFIG_ROBA_AUTOMOUSE_KEY_CONTROL)
+  zephyr_library()
+  zephyr_library_sources(src/automouse_key_control.c)
+  zephyr_library_include_directories(${APPLICATION_SOURCE_DIR}/include)
+endif()

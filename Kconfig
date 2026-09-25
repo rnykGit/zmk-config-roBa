@@ -1,0 +1,8 @@
+config ROBA_AUTOMOUSE_KEY_CONTROL
+    bool "Control the PMW3610 auto mouse layer with key presses"
+    default y
+    depends on PMW3610 && ZMK_SPLIT_ROLE_CENTRAL
+    help
+        While the auto mouse layer is active, pressing a key bound on the
+        mouse layer restarts its timeout, and pressing any other key exits
+        the layer immediately.
