@@ -9,7 +9,10 @@
 };
 
 &trackball {
-    automouse-layer = <4>;
+    /* automouse-layer is intentionally left unset (disabled) here: the
+     * driver's own immediate activation would fire before our 0.3s
+     * activation delay in src/automouse_key_control.c gets a chance to run.
+     * See CONFIG_ROBA_AUTOMOUSE_LAYER in Kconfig for the layer number. */
     scroll-layers = <5>;
 
     // arrows {
