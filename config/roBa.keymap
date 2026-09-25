@@ -43,6 +43,16 @@
             bindings = <&to 6>;
             key-positions = <34 42>;
         };
+
+        lefttab {
+            bindings = <&kp RC(RS(TAB))>;
+            key-positions = <18 30>;
+        };
+
+        righttab {
+            bindings = <&kp RC(TAB)>;
+            key-positions = <19 31>;
+        };
     };
 
     macros {
@@ -71,9 +81,9 @@
         default_layer {
             bindings = <
 &kp Q      &kp W         &kp E             &kp R         &kp T                                                           &kp Y        &kp U  &lt 5 I  &kp O      &kp P
-&kp A      &kp S         &kp D             &kp F         &kp G      &kp EQUAL                     &kp HASH               &kp H        &kp J  &kp K    &kp L      &kp SEMI
-&kp Z      &kp X         &kp C             &kp V         &kp B      &kp MINUS                     &kp SLASH              &kp B        &kp N  &kp M    &kp COMMA  &kp DOT
-&kp LCTRL  &kp LEFT_WIN  &kp SINGLE_QUOTE  &kp LEFT_ALT  &lt 2 TAB  &mt LEFT_SHIFT BACKSPACE      &mt RIGHT_SHIFT SPACE  &lt 1 ENTER                             &kp RIGHT_ALT
+&kp A      &kp S         &kp D             &kp F         &kp G      &kp EQUAL                     &kp EQUAL              &kp H        &kp J  &kp K    &kp L      &kp SEMI
+&kp Z      &kp X         &kp C             &kp V         &kp B      &kp MINUS                     &kp MINUS              &kp B        &kp N  &kp M    &kp COMMA  &kp DOT
+&kp LCTRL  &kp LEFT_WIN  &kp SINGLE_QUOTE  &kp LEFT_WIN  &lt 2 TAB  &mt LEFT_SHIFT BACKSPACE      &mt RIGHT_SHIFT SPACE  &lt 1 ENTER                             &kp RA(F4)
             >;
 
             sensor-bindings = <&inc_dec_kp PG_UP PAGE_DOWN>;
@@ -81,10 +91,10 @@
 
         FUNCTION {
             bindings = <
-&trans  &kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &kp EQUAL                      &trans  &trans          &trans        &trans          &trans
-&trans  &kp NUMBER_4  &kp NUMBER_5  &kp NUMBER_6  &kp MINUS  &kp F7      &trans  &trans  &kp LEFT_ARROW  &kp UP_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW
-&trans  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp SLASH  &kp F8      &trans  &trans  &trans          &trans        &trans          &trans
-&trans  &kp NUMBER_0  &kp DOT       &trans        &trans     &trans      &trans  &trans                                                &trans
+&trans  &kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &kp EQUAL                      &trans  &trans          &kp UP_ARROW    &trans           &trans
+&trans  &kp NUMBER_4  &kp NUMBER_5  &kp NUMBER_6  &kp MINUS  &kp F7      &trans  &trans  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &trans
+&trans  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp SLASH  &kp F8      &trans  &trans  &trans          &trans          &trans           &trans
+&trans  &kp NUMBER_0  &kp DOT       &trans        &trans     &trans      &trans  &trans                                                   &trans
             >;
         };
 
