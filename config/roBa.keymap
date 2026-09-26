@@ -40,7 +40,7 @@
         };
 
         henkan {
-            bindings = <&lt_sticky 5 LANGUAGE_1>;
+            bindings = <&lt 5 LANGUAGE_1>;
             key-positions = <18 19>;
         };
 
@@ -118,6 +118,7 @@
         // deactivating when the key is released. src/automouse_key_control.c
         // (CONFIG_ROBA_SCROLL_LAYER) deactivates it again once a key not
         // bound on that layer is pressed.
+
         lt_sticky: lt_sticky {
             compatible = "zmk,behavior-hold-tap";
             label = "LAYER_TAP_STICKY";
@@ -153,10 +154,10 @@
 
         NUM {
             bindings = <
-&trans  &trans  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &trans                      &kp EQUAL  &kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &trans
-&trans  &trans  &kp LEFT_BRACE        &kp RIGHT_BRACE        &trans  &trans      &trans  &kp MINUS  &kp NUMBER_4  &kp NUMBER_5  &kp NUMBER_6  &trans
-&trans  &trans  &kp LEFT_BRACKET      &kp RIGHT_BRACKET      &trans  &trans      &trans  &kp SLASH  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &trans
-&trans  &trans  &trans                &trans                 &trans  &trans      &trans  &trans                                               &kp NUMBER_0
+&trans  &trans  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &trans                      &kp EQUAL     &kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &trans
+&trans  &trans  &kp LEFT_BRACE        &kp RIGHT_BRACE        &trans  &trans      &trans  &kp MINUS     &kp NUMBER_4  &kp NUMBER_5  &kp NUMBER_6  &trans
+&trans  &trans  &kp LEFT_BRACKET      &kp RIGHT_BRACKET      &trans  &trans      &trans  &kp SLASH     &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &trans
+&trans  &trans  &trans                &trans                 &trans  &trans      &trans  &kp NUMBER_0                                            &trans
             >;
         };
 
@@ -173,19 +174,19 @@
 
         MOUSE {
             bindings = <
-&trans  &trans  &trans  &trans  &trans                      &trans  &kp DEL   &kp RC(F4)  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &mkp MB1  &mkp MB2    &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans    &trans      &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                                &trans
+&trans  &trans  &trans  &trans  &trans                      &trans     &kp DEL   &kp RC(F4)  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans     &mkp MB1  &mkp MB2    &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans     &trans    &trans      &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &kp RCTRL                                &trans
             >;
         };
 
         SCROLL {
             bindings = <
-&trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                          &trans
+&trans  &trans  &trans  &trans  &trans                      &trans  &trans     &trans     &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &mkp LCLK  &mkp RCLK  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans     &trans     &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                                &trans
             >;
         };
 
