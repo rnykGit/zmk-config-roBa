@@ -4,22 +4,30 @@ config ROBA_AUTOMOUSE_KEY_CONTROL
     depends on PMW3610 && ZMK_SPLIT_ROLE_CENTRAL
     help
         Auto mouse layer (CONFIG_ROBA_AUTOMOUSE_LAYER):
-        - Every trackball movement restarts a
-          CONFIG_ROBA_AUTOMOUSE_ACTIVATION_DELAY_MS countdown. If it elapses
+        - Trackball movement must be continuous for at least
+          CONFIG_ROBA_AUTOMOUSE_MIN_MOVEMENT_MS (to ignore tiny accidental
+          bumps). Once satisfied, every further movement restarts a
+          CONFIG_ROBA_AUTOMOUSE_ACTIVATION_DELAY_MS countdown; if it elapses
           with no key pressed in the meantime, the auto mouse layer is
-          activated. Pressing any key before it elapses cancels it.
+          activated. Pressing any key before that cancels it.
         - No time-based exit: once active, the layer stays active until a
           key not bound on it is pressed, which exits it immediately.
         Note: the trackball's `automouse-layer` devicetree property must be
         left unset so the driver does not also activate the layer itself.
 
         Scroll layer (CONFIG_ROBA_SCROLL_LAYER):
-        - Once activated (e.g. by the &lt_sticky hold-tap in the keymap),
-          stays active until a key not bound on that layer is pressed.
+        - Activated/toggled elsewhere (the &lt_sticky hold-tap in the
+          keymap). Once active, stays active until a key not bound on that
+          layer is pressed.
 
 config ROBA_AUTOMOUSE_LAYER
     int "Layer to activate as the auto mouse layer"
     default 4
+    depends on ROBA_AUTOMOUSE_KEY_CONTROL
+
+config ROBA_AUTOMOUSE_MIN_MOVEMENT_MS
+    int "Milliseconds of continuous trackball movement required before it counts as real movement"
+    default 100
     depends on ROBA_AUTOMOUSE_KEY_CONTROL
 
 config ROBA_AUTOMOUSE_ACTIVATION_DELAY_MS

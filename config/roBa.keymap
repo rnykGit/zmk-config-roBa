@@ -114,15 +114,15 @@
             tapping-term-ms = <200>;
         };
 
-        // Like &lt, but the held layer stays active (like &to) instead of
-        // deactivating when the key is released. src/automouse_key_control.c
-        // (CONFIG_ROBA_SCROLL_LAYER) deactivates it again once a key not
-        // bound on that layer is pressed.
-
+        // Like &lt, but the held layer stays active instead of deactivating
+        // when the key is released; holding it again while already active
+        // toggles it back off. src/automouse_key_control.c
+        // (CONFIG_ROBA_SCROLL_LAYER) also deactivates it once a key outside
+        // the layer is pressed.
         lt_sticky: lt_sticky {
             compatible = "zmk,behavior-hold-tap";
             label = "LAYER_TAP_STICKY";
-            bindings = <&to>, <&kp>;
+            bindings = <&tog>, <&kp>;
 
             #binding-cells = <2>;
             tapping-term-ms = <200>;
