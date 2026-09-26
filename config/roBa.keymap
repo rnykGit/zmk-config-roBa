@@ -82,6 +82,16 @@
             bindings = <&kp RIGHT_SHIFT>;
             key-positions = <33 32>;
         };
+
+        lclick {
+            bindings = <&mkp LCLK>;
+            key-positions = <18 30>;
+        };
+
+        rclick {
+            bindings = <&mkp RCLK>;
+            key-positions = <31 19>;
+        };
     };
 
     macros {
