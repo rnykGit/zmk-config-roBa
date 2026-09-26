@@ -4,17 +4,16 @@
  * Auto mouse layer (CONFIG_ROBA_AUTOMOUSE_LAYER):
  * The PMW3610 driver's own automouse-layer feature is left disabled (see the
  * comment on &trackball in config/roBa.keymap) so this file has full control:
- * - Activated only after CONFIG_ROBA_AUTOMOUSE_ACTIVATION_DELAY_MS of
- *   continuous trackball movement, to avoid accidental activation from brief
- *   bumps.
- * - While active, any further trackball movement, or pressing a key bound on
- *   the mouse layer, restarts the exit timeout (CONFIG_PMW3610_AUTOMOUSE_TIMEOUT_MS).
- * - Pressing any other key exits the layer immediately.
+ * - Every trackball movement (re)starts a CONFIG_ROBA_AUTOMOUSE_ACTIVATION_DELAY_MS
+ *   countdown. If it elapses with no other key press, the auto mouse layer is
+ *   activated. Pressing any key before it elapses cancels the countdown.
+ * - There is no time-based exit: once active, the layer stays active until a
+ *   key not bound on it is pressed, which deactivates it immediately.
  *
  * Scroll layer (CONFIG_ROBA_SCROLL_LAYER):
  * Activated elsewhere (the &lt_sticky hold-tap in the keymap). Once active,
- * it has no timeout of its own: it simply stays active until a key not bound
- * on that layer is pressed, at which point it is deactivated here.
+ * it likewise has no timeout: it stays active until a key not bound on that
+ * layer is pressed, at which point it is deactivated here.
  */
 
 #include <zephyr/device.h>
@@ -30,48 +29,28 @@
 #define AUTOMOUSE_LAYER CONFIG_ROBA_AUTOMOUSE_LAYER
 #define SCROLL_LAYER CONFIG_ROBA_SCROLL_LAYER
 
-/* Any gap longer than this between trackball movement events is treated as
- * the ball having stopped, so a fresh activation-delay streak must build up
- * again rather than counting the stopped time as movement. */
-#define MOVEMENT_GAP_RESET_MS 100
-
 static bool automouse_active;
-static int64_t movement_streak_start;
-static int64_t last_movement_time;
 
-static void automouse_timeout_handler(struct k_work *work) {
-    automouse_active = false;
-    zmk_keymap_layer_deactivate(AUTOMOUSE_LAYER);
+static void automouse_activation_handler(struct k_work *work) {
+    automouse_active = true;
+    zmk_keymap_layer_activate(AUTOMOUSE_LAYER);
 }
 
-static K_WORK_DELAYABLE_DEFINE(automouse_timeout_work, automouse_timeout_handler);
-
-static void extend_automouse_timeout(void) {
-    k_work_reschedule(&automouse_timeout_work, K_MSEC(CONFIG_PMW3610_AUTOMOUSE_TIMEOUT_MS));
-}
+static K_WORK_DELAYABLE_DEFINE(automouse_activation_work, automouse_activation_handler);
 
 static void trackball_input_callback(struct input_event *evt) {
     if (evt->type != INPUT_EV_REL || (evt->code != INPUT_REL_X && evt->code != INPUT_REL_Y)) {
         return;
     }
 
-    int64_t now = k_uptime_get();
-
     if (automouse_active) {
-        extend_automouse_timeout();
         return;
     }
 
-    if (movement_streak_start == 0 || now - last_movement_time > MOVEMENT_GAP_RESET_MS) {
-        movement_streak_start = now;
-    }
-    last_movement_time = now;
-
-    if (now - movement_streak_start >= CONFIG_ROBA_AUTOMOUSE_ACTIVATION_DELAY_MS) {
-        automouse_active = true;
-        zmk_keymap_layer_activate(AUTOMOUSE_LAYER);
-        extend_automouse_timeout();
-    }
+    /* (Re)start the countdown on every movement, so it only fires once
+     * movement has been still for the full delay. */
+    k_work_reschedule(&automouse_activation_work,
+                      K_MSEC(CONFIG_ROBA_AUTOMOUSE_ACTIVATION_DELAY_MS));
 }
 
 INPUT_CALLBACK_DEFINE(DEVICE_DT_GET(DT_NODELABEL(trackball)), trackball_input_callback);
@@ -89,22 +68,22 @@ static bool is_layer_bound_key(uint32_t layer, uint32_t position) {
 
 static int automouse_key_control_listener(const zmk_event_t *eh) {
     const struct zmk_position_state_changed *ev = as_zmk_position_state_changed(eh);
-    if (ev == NULL) {
+    if (ev == NULL || !ev->state) {
         return ZMK_EV_EVENT_BUBBLE;
     }
 
     if (automouse_active) {
-        if (is_layer_bound_key(AUTOMOUSE_LAYER, ev->position)) {
-            extend_automouse_timeout();
-        } else if (ev->state) {
-            k_work_cancel_delayable(&automouse_timeout_work);
+        if (!is_layer_bound_key(AUTOMOUSE_LAYER, ev->position)) {
             automouse_active = false;
             zmk_keymap_layer_deactivate(AUTOMOUSE_LAYER);
         }
+    } else {
+        /* A key press means the trackball movement wasn't a click setup;
+         * cancel any pending activation. */
+        k_work_cancel_delayable(&automouse_activation_work);
     }
 
-    if (ev->state && zmk_keymap_layer_active(SCROLL_LAYER) &&
-        !is_layer_bound_key(SCROLL_LAYER, ev->position)) {
+    if (zmk_keymap_layer_active(SCROLL_LAYER) && !is_layer_bound_key(SCROLL_LAYER, ev->position)) {
         zmk_keymap_layer_deactivate(SCROLL_LAYER);
     }
 
