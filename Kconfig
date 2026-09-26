@@ -1,16 +1,20 @@
 config ROBA_AUTOMOUSE_KEY_CONTROL
-    bool "Custom control of the PMW3610 auto mouse layer"
+    bool "Custom sticky-layer control for roBa"
     default y
     depends on PMW3610 && ZMK_SPLIT_ROLE_CENTRAL
     help
-        Replaces the driver's built-in auto mouse layer activation with:
-        - Activating the layer only after CONFIG_ROBA_AUTOMOUSE_ACTIVATION_DELAY_MS
-          of continuous trackball movement (to avoid accidental activation).
+        Auto mouse layer (CONFIG_ROBA_AUTOMOUSE_LAYER):
+        - Activated only after CONFIG_ROBA_AUTOMOUSE_ACTIVATION_DELAY_MS of
+          continuous trackball movement (to avoid accidental activation).
         - While active, pressing a key bound on the mouse layer restarts its
           timeout (CONFIG_PMW3610_AUTOMOUSE_TIMEOUT_MS), and pressing any
           other key exits the layer immediately.
         Note: the trackball's `automouse-layer` devicetree property must be
         left unset so the driver does not also activate the layer itself.
+
+        Scroll layer (CONFIG_ROBA_SCROLL_LAYER):
+        - Once activated (e.g. by the &lt_sticky hold-tap in the keymap),
+          stays active until a key not bound on that layer is pressed.
 
 config ROBA_AUTOMOUSE_LAYER
     int "Layer to activate as the auto mouse layer"
@@ -19,5 +23,10 @@ config ROBA_AUTOMOUSE_LAYER
 
 config ROBA_AUTOMOUSE_ACTIVATION_DELAY_MS
     int "Milliseconds of continuous trackball movement required to activate the auto mouse layer"
-    default 300
+    default 100
+    depends on ROBA_AUTOMOUSE_KEY_CONTROL
+
+config ROBA_SCROLL_LAYER
+    int "Sticky scroll layer that exits when a key outside it is pressed"
+    default 5
     depends on ROBA_AUTOMOUSE_KEY_CONTROL

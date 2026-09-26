@@ -10,9 +10,10 @@
 
 &trackball {
     /* automouse-layer is intentionally left unset (disabled) here: the
-     * driver's own immediate activation would fire before our 0.3s
-     * activation delay in src/automouse_key_control.c gets a chance to run.
-     * See CONFIG_ROBA_AUTOMOUSE_LAYER in Kconfig for the layer number. */
+     * driver's own immediate activation would fire before our activation
+     * delay in src/automouse_key_control.c gets a chance to run.
+     * See CONFIG_ROBA_AUTOMOUSE_LAYER / CONFIG_ROBA_AUTOMOUSE_ACTIVATION_DELAY_MS
+     * in Kconfig. */
 
     scroll-layers = <5>;
 
@@ -34,12 +35,12 @@
         compatible = "zmk,combos";
 
         muhenkan {
-            bindings = <&lt 5 LANGUAGE_2>;
+            bindings = <&lt_sticky 5 LANGUAGE_2>;
             key-positions = <13 12>;
         };
 
         henkan {
-            bindings = <&lt 5 LANGUAGE_1>;
+            bindings = <&lt_sticky 5 LANGUAGE_1>;
             key-positions = <18 19>;
         };
 
@@ -108,6 +109,19 @@
             compatible = "zmk,behavior-hold-tap";
             label = "LAYER_TAP_TO_0";
             bindings = <&mo>, <&to_layer_0>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+        };
+
+        // Like &lt, but the held layer stays active (like &to) instead of
+        // deactivating when the key is released. src/automouse_key_control.c
+        // (CONFIG_ROBA_SCROLL_LAYER) deactivates it again once a key not
+        // bound on that layer is pressed.
+        lt_sticky: lt_sticky {
+            compatible = "zmk,behavior-hold-tap";
+            label = "LAYER_TAP_STICKY";
+            bindings = <&to>, <&kp>;
 
             #binding-cells = <2>;
             tapping-term-ms = <200>;

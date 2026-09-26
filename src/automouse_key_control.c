@@ -1,15 +1,20 @@
 /*
- * Custom auto mouse layer control for roBa.
+ * Custom sticky-layer control for roBa.
  *
+ * Auto mouse layer (CONFIG_ROBA_AUTOMOUSE_LAYER):
  * The PMW3610 driver's own automouse-layer feature is left disabled (see the
  * comment on &trackball in config/roBa.keymap) so this file has full control:
- *
- * - The auto mouse layer (CONFIG_ROBA_AUTOMOUSE_LAYER) is activated only
- *   after CONFIG_ROBA_AUTOMOUSE_ACTIVATION_DELAY_MS of continuous trackball
- *   movement, to avoid accidental activation from brief bumps.
+ * - Activated only after CONFIG_ROBA_AUTOMOUSE_ACTIVATION_DELAY_MS of
+ *   continuous trackball movement, to avoid accidental activation from brief
+ *   bumps.
  * - While active, any further trackball movement, or pressing a key bound on
  *   the mouse layer, restarts the exit timeout (CONFIG_PMW3610_AUTOMOUSE_TIMEOUT_MS).
  * - Pressing any other key exits the layer immediately.
+ *
+ * Scroll layer (CONFIG_ROBA_SCROLL_LAYER):
+ * Activated elsewhere (the &lt_sticky hold-tap in the keymap). Once active,
+ * it has no timeout of its own: it simply stays active until a key not bound
+ * on that layer is pressed, at which point it is deactivated here.
  */
 
 #include <zephyr/device.h>
@@ -23,6 +28,7 @@
 #include <zmk/keymap.h>
 
 #define AUTOMOUSE_LAYER CONFIG_ROBA_AUTOMOUSE_LAYER
+#define SCROLL_LAYER CONFIG_ROBA_SCROLL_LAYER
 
 /* Any gap longer than this between trackball movement events is treated as
  * the ball having stopped, so a fresh activation-delay streak must build up
@@ -70,9 +76,9 @@ static void trackball_input_callback(struct input_event *evt) {
 
 INPUT_CALLBACK_DEFINE(DEVICE_DT_GET(DT_NODELABEL(trackball)), trackball_input_callback);
 
-static bool is_automouse_layer_key(uint32_t position) {
+static bool is_layer_bound_key(uint32_t layer, uint32_t position) {
     const struct zmk_behavior_binding *binding =
-        zmk_keymap_get_layer_binding_at_idx(AUTOMOUSE_LAYER, position);
+        zmk_keymap_get_layer_binding_at_idx(layer, position);
     if (binding == NULL || binding->behavior_dev == NULL) {
         return false;
     }
@@ -83,16 +89,23 @@ static bool is_automouse_layer_key(uint32_t position) {
 
 static int automouse_key_control_listener(const zmk_event_t *eh) {
     const struct zmk_position_state_changed *ev = as_zmk_position_state_changed(eh);
-    if (ev == NULL || !automouse_active) {
+    if (ev == NULL) {
         return ZMK_EV_EVENT_BUBBLE;
     }
 
-    if (is_automouse_layer_key(ev->position)) {
-        extend_automouse_timeout();
-    } else if (ev->state) {
-        k_work_cancel_delayable(&automouse_timeout_work);
-        automouse_active = false;
-        zmk_keymap_layer_deactivate(AUTOMOUSE_LAYER);
+    if (automouse_active) {
+        if (is_layer_bound_key(AUTOMOUSE_LAYER, ev->position)) {
+            extend_automouse_timeout();
+        } else if (ev->state) {
+            k_work_cancel_delayable(&automouse_timeout_work);
+            automouse_active = false;
+            zmk_keymap_layer_deactivate(AUTOMOUSE_LAYER);
+        }
+    }
+
+    if (ev->state && zmk_keymap_layer_active(SCROLL_LAYER) &&
+        !is_layer_bound_key(SCROLL_LAYER, ev->position)) {
+        zmk_keymap_layer_deactivate(SCROLL_LAYER);
     }
 
     return ZMK_EV_EVENT_BUBBLE;
