@@ -35,7 +35,7 @@
         compatible = "zmk,combos";
 
         muhenkan {
-            bindings = <&lt_sticky 5 LANGUAGE_2>;
+            bindings = <&lt 5 LANGUAGE_2>;
             key-positions = <13 12>;
         };
 
@@ -119,6 +119,7 @@
         // toggles it back off. src/automouse_key_control.c
         // (CONFIG_ROBA_SCROLL_LAYER) also deactivates it once a key outside
         // the layer is pressed.
+
         lt_sticky: lt_sticky {
             compatible = "zmk,behavior-hold-tap";
             label = "LAYER_TAP_STICKY";
@@ -174,10 +175,10 @@
 
         MOUSE {
             bindings = <
-&trans  &trans     &trans  &trans  &trans                      &trans  &kp DEL   &kp RC(F4)  &trans  &trans
-&trans  &trans     &trans  &trans  &trans  &trans      &trans  &trans  &mkp MB1  &mkp MB2    &trans  &trans
-&trans  &trans     &trans  &trans  &trans  &trans      &trans  &trans  &trans    &trans      &trans  &trans
-&trans  &kp LCTRL  &trans  &trans  &trans  &trans      &trans  &trans                                &kp RCTRL
+&trans  &trans  &trans  &trans  &trans                      &trans     &kp DEL   &kp RC(F4)  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans     &mkp MB1  &mkp MB2    &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans     &trans    &trans      &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &kp RCTRL                                &trans
             >;
         };
 
