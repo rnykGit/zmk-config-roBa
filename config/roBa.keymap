@@ -35,7 +35,7 @@
         compatible = "zmk,combos";
 
         muhenkan {
-            bindings = <&lt 5 LANGUAGE_2>;
+            bindings = <&kp LANGUAGE_2>;
             key-positions = <13 12>;
         };
 
@@ -83,16 +83,6 @@
             bindings = <&kp RIGHT_SHIFT>;
             key-positions = <33 32>;
         };
-
-        lclick {
-            bindings = <&mkp LCLK>;
-            key-positions = <18 30>;
-        };
-
-        rclick {
-            bindings = <&mkp RCLK>;
-            key-positions = <31 19>;
-        };
     };
 
     macros {
@@ -135,10 +125,10 @@
 
         default_layer {
             bindings = <
-&kp Q           &kp W      &kp E         &kp R             &kp T                                                             &kp Y             &kp U  &kp I  &kp O      &kp P
-&kp A           &kp S      &kp D         &kp F             &kp G            &kp BACKSLASH             &kp EQUAL              &kp H             &kp J  &kp K  &kp L      &kp SEMI
-&kp Z           &kp X      &kp C         &kp V             &kp B            &kp SLASH                 &kp MINUS              &kp SINGLE_QUOTE  &kp N  &kp M  &kp COMMA  &kp PERIOD
-&kp LEFT_SHIFT  &kp LCTRL  &kp LEFT_ALT  &mt LEFT_WIN TAB  &lt 2 BACKSPACE  &mt LEFT_SHIFT SPACE      &mt RIGHT_SHIFT SPACE  &lt 1 ENTER                                &kp ESCAPE
+&kp Q           &kp W      &kp E         &kp R             &kp T                                                             &kp Y         &kp U  &kp I      &kp O      &kp P
+&kp A           &kp S      &kp D         &kp F             &kp G            &kp BACKSLASH             &kp EQUAL              &kp H         &kp J  &kp K      &kp L      &kp SEMI
+&kp Z           &kp X      &kp C         &kp V             &kp B            &kp APOS                  &kp MINUS              &kp N         &kp M  &kp COMMA  &kp COMMA  &kp SLASH
+&kp LEFT_SHIFT  &kp LCTRL  &kp LEFT_ALT  &mt LEFT_WIN TAB  &lt 2 BACKSPACE  &mt LEFT_SHIFT SPACE      &mt RIGHT_SHIFT SPACE  &lt 1 PERIOD                               &kp ESCAPE
             >;
 
             sensor-bindings = <&inc_dec_kp PG_UP PAGE_DOWN>;
@@ -175,10 +165,10 @@
 
         MOUSE {
             bindings = <
-&trans  &trans  &trans  &trans  &trans                               &trans     &kp DEL   &kp RC(F4)  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &msc SCRL_UP     &trans     &mkp MB1  &mkp MB2    &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &msc SCRL_DOWN   &trans     &trans    &trans      &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &kp RIGHT_SHIFT  &kp RCTRL                                &trans
+&trans  &trans  &trans  &trans  &trans                      &trans     &kp DEL   &kp RC(F4)  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans     &mkp MB1  &mkp MB2    &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans     &trans    &trans      &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &kp RCTRL                                &trans
             >;
         };
 
