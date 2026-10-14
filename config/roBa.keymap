@@ -45,7 +45,7 @@
         };
 
         Bluetooth {
-            bindings = <&to 6>;
+            bindings = <&tog 6>;
             key-positions = <34 42>;
         };
 
