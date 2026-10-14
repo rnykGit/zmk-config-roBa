@@ -165,10 +165,10 @@
 
         MOUSE {
             bindings = <
-&trans  &trans  &trans  &trans  &trans                      &trans     &kp DEL   &kp RC(F4)  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans     &mkp MB1  &mkp MB2    &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans     &trans    &trans      &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &kp RCTRL                                &trans
+&trans  &trans  &trans  &trans  &trans                            &trans     &kp DEL   &kp RC(F4)  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &kp C_VOL_UP  &trans     &mkp MB1  &mkp MB2    &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &kp C_VOL_DN  &trans     &trans    &trans      &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans        &kp RCTRL                                &trans
             >;
         };
 
