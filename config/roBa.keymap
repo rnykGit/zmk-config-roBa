@@ -83,6 +83,11 @@
             bindings = <&kp RIGHT_SHIFT>;
             key-positions = <33 32>;
         };
+
+        Default {
+            bindings = <&to 0>;
+            key-positions = <16 28>;
+        };
     };
 
     macros {
