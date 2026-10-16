@@ -133,7 +133,7 @@
 &kp Q           &kp W      &kp E         &kp R             &kp T                                                             &kp Y        &kp U  &kp I      &kp O    &kp P
 &kp A           &kp S      &kp D         &kp F             &kp G            &kp BACKSLASH             &kp EQUAL              &kp H        &kp J  &kp K      &kp L    &kp SEMI
 &kp Z           &kp X      &kp C         &kp V             &kp B            &kp APOS                  &mt BACKSPACE MINUS    &kp N        &kp M  &kp COMMA  &kp DOT  &kp SLASH
-&kp LEFT_SHIFT  &kp LCTRL  &kp LEFT_ALT  &mt TAB LEFT_WIN  &lt 2 BACKSPACE  &mt LEFT_SHIFT SPACE      &mt RIGHT_SHIFT SPACE  &lt 1 ENTER                             &kp ESCAPE
+&kp LEFT_SHIFT  &kp LCTRL  &kp LEFT_ALT  &mt LEFT_WIN TAB  &lt 2 BACKSPACE  &mt LEFT_SHIFT SPACE      &mt RIGHT_SHIFT SPACE  &lt 1 ENTER                             &kp ESCAPE
             >;
 
             sensor-bindings = <&inc_dec_kp PG_UP PAGE_DOWN>;
@@ -141,7 +141,7 @@
 
         FUNCTION {
             bindings = <
-&trans  &kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &kp EQUAL                      &trans  &trans          &trans          &trans           &trans
+&trans  &kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &kp EQUAL                      &trans  &trans          &kp UP_ARROW    &trans           &trans
 &trans  &kp NUMBER_4  &kp NUMBER_5  &kp NUMBER_6  &kp MINUS  &kp F7      &trans  &trans  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &trans
 &trans  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp SLASH  &kp F8      &trans  &trans  &trans          &kp DOWN_ARROW  &trans           &trans
 &trans  &kp NUMBER_0  &kp DOT       &trans        &trans     &trans      &trans  &trans                                                   &trans
@@ -170,10 +170,10 @@
 
         MOUSE {
             bindings = <
-&trans  &trans  &trans  &trans  &trans                            &trans     &kp DEL   &kp RC(F4)  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &kp C_VOL_UP  &trans     &mkp MB1  &mkp MB2    &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &kp C_VOL_DN  &trans     &trans    &trans      &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans        &kp RCTRL                                &trans
+&trans  &trans  &trans  &trans  &trans                            &trans  &kp DEL   &kp RC(F4)  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &kp C_VOL_UP  &trans  &mkp MB1  &mkp MB2    &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &kp C_VOL_DN  &trans  &trans    &trans      &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans        &trans                                &trans
             >;
         };
 
