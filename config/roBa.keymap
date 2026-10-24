@@ -40,12 +40,12 @@
         };
 
         henkan {
-            bindings = <&kp LANG5>;
+            bindings = <&lt 5 LANGUAGE_1>;
             key-positions = <18 19>;
         };
 
         Bluetooth {
-            bindings = <&tog 6>;
+            bindings = <&mo 6>;
             key-positions = <34 42>;
         };
 
@@ -84,8 +84,8 @@
             key-positions = <33 32>;
         };
 
-        Default {
-            bindings = <&to 0>;
+        return {
+            bindings = <&mkp MB4>;
             key-positions = <16 28>;
         };
 
@@ -97,6 +97,16 @@
         scroll {
             bindings = <&tog 5>;
             key-positions = <30 31>;
+        };
+
+        delete {
+            bindings = <&kp DEL>;
+            key-positions = <6 18>;
+        };
+
+        innerclose {
+            bindings = <&kp RC(F4)>;
+            key-positions = <7 19>;
         };
     };
 
@@ -180,19 +190,19 @@
 
         MOUSE {
             bindings = <
-&trans  &trans  &trans  &trans  &trans                            &trans  &kp DEL   &kp RC(F4)  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &kp C_VOL_UP  &trans  &mkp MB1  &mkp MB2    &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &kp C_VOL_DN  &trans  &trans    &trans      &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans        &trans                                &trans
+&trans  &trans  &trans  &trans  &trans                            &trans  &trans    &trans    &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &kp C_VOL_UP  &trans  &mkp MB1  &mkp MB2  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &kp C_VOL_DN  &trans  &trans    &trans    &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans        &trans                              &trans
             >;
         };
 
         SCROLL {
             bindings = <
-&trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                          &trans
+&trans  &trans  &trans  &trans  &trans                      &trans  &trans     &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &mkp LCLK  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans     &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                             &trans
             >;
         };
 
