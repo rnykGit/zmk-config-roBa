@@ -40,7 +40,7 @@
         };
 
         henkan {
-            bindings = <&lt 5 LANGUAGE_1>;
+            bindings = <&kp LANG5>;
             key-positions = <18 19>;
         };
 
@@ -92,6 +92,11 @@
         escape2 {
             bindings = <&kp ESCAPE>;
             key-positions = <40 41>;
+        };
+
+        scroll {
+            bindings = <&tog 5>;
+            key-positions = <30 31>;
         };
     };
 
